@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path,re_path
 from . import views # 导入views
 
 app_name = 'learning_logs'
@@ -10,7 +10,10 @@ urlpatterns = [
     path('topics',views.topics,name='topics'),
 
     #特定主题的详细界面
-    path('topics/(?P<topic_id>\d+)',views.topic,name='topic'),  #使用正则表达式匹配URL
+    re_path(r'topics/(?P<topic_id>\d+)/$',views.topic,name='topic'),  
 
+    #用于添加新主题的网页
     path('new_topics',views.new_topic,name='new_topic'),
+
+    re_path(r'new_entry/(?P<topic_id>\d+)/$',views.new_entry,name='new_entry'),
 ]
